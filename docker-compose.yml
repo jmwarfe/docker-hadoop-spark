@@ -12,9 +12,5 @@ services:
       - 8088:8088 # HTTP:// Resource manager
       - 8042:8042 # HTTP:// Node manager
       - 9000:9000 # HDFS:// Connect to cluster from applications
-    networks:
-      - xapp
-
-networks:
-  xapp:
-    external: true
+      - 2022:22 # SSH
+      - 4040:4040 # Spark
