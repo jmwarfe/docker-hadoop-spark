@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update
 RUN apt-get -y dist-upgrade
-RUN apt-get -y install wget ssh openjdk-8-jdk-headless
+RUN apt-get -y install wget ssh openjdk-11-jdk-headless
 
 # Download and unpack Hadoop
 RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz --progress=bar:force:noscroll \
@@ -18,7 +18,7 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz 
 # Only used for manual testing
 RUN apt-get -y install vim
 
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
 ENV HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 
