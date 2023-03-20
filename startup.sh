@@ -8,4 +8,5 @@ hdfs namenode -format
 start-dfs.sh
 start-yarn.sh
 
-tail -qF /usr/local/hadoop/logs/*.log
+echo "Starting Jupyter..."
+jupyter notebook --allow-root --ip=0.0.0.0 
