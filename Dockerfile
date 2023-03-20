@@ -48,8 +48,35 @@ COPY startup.sh $HADOOP_HOME/startup.sh
 COPY hadoop_config /usr/local/hadoop/etc/hadoop
 COPY ssh_config/config /root/.ssh/
 
-RUN chmod 744 -R $HADOOP_HOME
+RUN chmod 755 -R $HADOOP_HOME
+RUN mkdir /code
 
-EXPOSE 9870 9864 9868 8088 9000 8042 4040
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    fonts-liberation \
+    # - pandoc is used to convert notebooks to html files
+    #   it's not present in aarch64 ubuntu image, so we install it here
+    pandoc \
+    # - run-one - a wrapper script that runs no more
+    #   than one unique  instance  of  some  command with a unique set of arguments,
+    #   we use `run-one-constantly` to support `RESTARTABLE` option
+    run-one && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+USER ${NB_UID}
+
+# Install Jupyter Notebook, Lab, and Hub
+# Generate a notebook server config
+# Cleanup temporary files
+# Correct permissions
+# Do all this in a single RUN command to avoid duplicating all of the
+# files across image layers when the permissions change
+WORKDIR /tmp
+RUN pip install notebook && \
+    jupyter notebook --generate-config 
+RUN echo "c.NotebookApp.notebook_dir ='/code'" > /root/.jupyter/jupyter_notebook_config.py
+ENV JUPYTER_PORT=8888
+
+EXPOSE 9870 9864 9868 8088 9000 8042 4040 8888
 
 ENTRYPOINT $HADOOP_HOME/startup.sh; bash
