@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update
 RUN apt-get -y dist-upgrade
-RUN apt-get -y install wget ssh openjdk-11-jdk-headless
+RUN apt-get -y install wget curl ssh openjdk-11-jdk-headless
 
 # Download and unpack Hadoop
 RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz --progress=bar:force:noscroll \
