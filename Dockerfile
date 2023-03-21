@@ -77,6 +77,8 @@ RUN pip install notebook && \
 RUN echo "c.NotebookApp.notebook_dir ='/code'" > /root/.jupyter/jupyter_notebook_config.py
 ENV JUPYTER_PORT=8888
 
+RUN pip install snakebite-py3 protobuf==3.20.*
+
 EXPOSE 9870 9864 9868 8088 9000 8042 4040 8888
 
 ENTRYPOINT $HADOOP_HOME/startup.sh; bash
