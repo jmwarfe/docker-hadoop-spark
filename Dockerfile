@@ -5,15 +5,15 @@ RUN apt-get -y dist-upgrade
 RUN apt-get -y install wget curl ssh openjdk-11-jdk-headless
 
 # Download and unpack Hadoop
-RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz --progress=bar:force:noscroll \
-    && tar xf hadoop-3.3.4.tar.gz \
-    && mv hadoop-3.3.4 /usr/local/hadoop \
-    && rm hadoop-3.3.4.tar.gz
+RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.5/hadoop-3.3.5.tar.gz --progress=bar:force:noscroll \
+    && tar xf hadoop-3.3.5.tar.gz \
+    && mv hadoop-3.3.5 /usr/local/hadoop \
+    && rm hadoop-3.3.5.tar.gz
 
-RUN wget https://dlcdn.apache.org/spark/spark-3.3.2/spark-3.3.2-bin-hadoop3.tgz --progress=bar:force:noscroll \
-    && tar xf spark-3.3.2-bin-hadoop3.tgz \
-    && mv spark-3.3.2-bin-hadoop3 /opt/spark \
-    && rm spark-3.3.2-bin-hadoop3.tgz
+RUN wget https://dlcdn.apache.org/spark/spark-3.3.4/spark-3.3.4-bin-hadoop3.tgz --progress=bar:force:noscroll \
+    && tar xf spark-3.3.4-bin-hadoop3.tgz \
+    && mv spark-3.3.4-bin-hadoop3 /opt/spark \
+    && rm spark-3.3.4-bin-hadoop3.tgz
 
 # Only used for manual testing
 RUN apt-get -y install vim
